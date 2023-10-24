@@ -22,9 +22,28 @@ m1 <- lm(y ~ 1, data = samp1)
 m2 <- lm(y ~ 1, data = samp2)
 
 summary(m1)
+summary(m2)
 ```
 
 **Oppgave 1: Explain the estimate, SE, *t*-value, and *p*-value from the regression models that we created previously (`m1` and `m2`).**
+
+summary m1:
+
+estimate = 0,1301
+
+std error = 0,6434
+
+t value = 0,202
+
+pr= 0,846
+
+Summary m2:
+
+Stimate = 1.476
+
+standar error = 0,467
+
+t-value 3.162
 
 **Oppgave 2: Discuss what contributes to the different results in the two studies (`m1` and `m2`).**
 
@@ -73,6 +92,13 @@ results <- bind_rows(results_8, results_40)
 ```
 
 **Oppgave 4: Calculate the standard deviation of the `estimate` variable, and the average of the `se` variable for each of the study sample sizes (8 and 40). Explain why these numbers are very similar. How can you define the Standard Error (SE) in light of these calculations?**
+
+Standar avik av estimatet
+
+```{r}
+m <- mean(results)
+s <- sd(samp)
+```
 
 **Oppgave 5: Create a histogram (see example code below) of the *p*-values from each study sample-size. How do you interpret these histograms, what do they tell you about the effect of sample size on statistical power?**
 

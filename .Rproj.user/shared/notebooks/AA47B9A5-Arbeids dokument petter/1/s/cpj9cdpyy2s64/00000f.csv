@@ -1,0 +1,3 @@
+"0","m <- mean(results)
+"
+"2","Warning: argument is not numeric or logical: returning NA"
