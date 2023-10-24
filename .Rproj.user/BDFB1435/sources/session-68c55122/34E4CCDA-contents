@@ -1,0 +1,83 @@
+Chunk for standar kjøringer
+
+```{r}
+library(tidyverse)
+library(exscidata)
+library(gt)
+```
+
+Oppsett siumulation
+
+```{r}
+set.seed(1)
+population <- rnorm(1000000, mean = 1.5, sd = 3)
+
+
+samp1 <- data.frame(y = sample(population, 8, replace = FALSE))
+
+samp2 <- data.frame(y = sample(population, 40, replace = FALSE))
+
+
+m1 <- lm(y ~ 1, data = samp1)
+m2 <- lm(y ~ 1, data = samp2)
+
+summary(m1)
+```
+
+**Oppgave 1: Explain the estimate, SE, *t*-value, and *p*-value from the regression models that we created previously (`m1` and `m2`).**
+
+**Oppgave 2: Discuss what contributes to the different results in the two studies (`m1` and `m2`).**
+
+**Oppgave 3: Why do we use the shaded area in the lower and upper tail of the *t*-distribution (See Figure** \@ref(fig:t-dist-fig)**).**
+
+```{r}
+# Create data frames to store the model estimates
+results_8 <- data.frame(estimate = rep(NA, 1000), 
+                      se = rep(NA, 1000), 
+                      pval = rep(NA, 1000), 
+                      n = 8)  
+
+results_40 <- data.frame(estimate = rep(NA, 1000), 
+                      se = rep(NA, 1000), 
+                      pval = rep(NA, 1000), 
+                      n = 40)
+
+# A for loop used to sample 1000 studies, each iteration (i) will draw a new sample
+# from the population. 
+
+for(i in 1:1000) {
+  
+  # Draw a sample 
+  samp1 <- data.frame(y = sample(population, 8, replace = FALSE))
+  samp2 <- data.frame(y = sample(population, 40, replace = FALSE))
+
+  # Model the data
+  m1 <- lm(y ~ 1, data = samp1)
+  m2 <- lm(y ~ 1, data = samp2)
+  
+  # Extract values from the models
+  results_8[i, 1] <- coef(summary(m1))[1, 1]
+  results_8[i, 2] <- coef(summary(m1))[1, 2]
+  results_8[i, 3] <- coef(summary(m1))[1, 4]
+
+  results_40[i, 1] <- coef(summary(m2))[1, 1]
+  results_40[i, 2] <- coef(summary(m2))[1, 2]
+  results_40[i, 3] <- coef(summary(m2))[1, 4]
+  
+  
+}
+
+# Save the results in a combined data frame
+
+results <- bind_rows(results_8, results_40)
+```
+
+**Oppgave 4: Calculate the standard deviation of the `estimate` variable, and the average of the `se` variable for each of the study sample sizes (8 and 40). Explain why these numbers are very similar. How can you define the Standard Error (SE) in light of these calculations?**
+
+**Oppgave 5: Create a histogram (see example code below) of the *p*-values from each study sample-size. How do you interpret these histograms, what do they tell you about the effect of sample size on statistical power?**
+
+**Oppgave 6: Calculate the number of studies from each sample size that declare a statistical significant effect (specify a threshold for , your significance level).**
+
+**Oppgave 7: Using the `pwr` package, calculate the power of a one-sample t-test, with a effect size of `1.5/3`, your specified significance level and sample sizes 8 and 40. Explain the results in the light of your simulations.**
+
+**Oppgave 8: With a significance level of 5%, how many studies would give you a "false positive" result if you did many repeated studies?**
