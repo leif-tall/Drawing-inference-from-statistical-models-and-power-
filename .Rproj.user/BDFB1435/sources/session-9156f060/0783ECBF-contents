@@ -66,6 +66,8 @@ For å kunne forklare hvorfor vi bruker de skyggelage delene i den øvre og nedr
 
 En normalfordelingskure tar utgangspunktet i at 95 prosent av populasjonen som via har hentet ut tallmateriale. Vill være innenfor gjennomsnittet +/- to standardavvik, og at 99,8 prosent vill være innenfor tre standardavvik. Når vi skal se på et tall i forhold til normalfordelingskurven, vill vi da kunne gi tallet en *Z-skår.* Denne beskriver kor mange standardavvik en observasjon vi ønsker å undersøke er fra gjennomsnittet. Når vi har flere observasjoner som ligger innenfor det samme område, kan vi beskrive at de ligger innenfor samme *persentil*. Når vi tar utgangspunkt i normalfordelingskurven, så er midten(medianen) i kurven den 50 persentil. Ut i fra denne beregner en den 25 og den 75 persentil. Disse er også kjent som *kvartiler\[*spiegelhalter\]*.* For å kunne skille de to kvartilene fra andre deler av kurven er disse ofte fargelagt i en annen farge, her finner en verdiene som er ekstreme og ikke legger sei i den 50 th persentil. <https://tma4245.math.ntnu.no/stokastiske-variabler-og-fordelinger/kvantil/>. Avstanden mellom de to kvartilene er målet på distribusjonen i data settet.
 
+## Simuleringen for oppgåve 4-8
+
 ```{r}
 # Create data frames to store the model estimates
 results_8 <- data.frame(estimate = rep(NA, 1000), 
@@ -111,7 +113,15 @@ results <- bind_rows(results_8, results_40)
 ### ##Oppgave 4: Calculate the standard deviation of the `estimate` variable, and the average of the `se` variable for each of the study sample sizes (8 and 40). Explain why these numbers are very similar. How can you define the Standard Error (SE) in light of these calculations?\*\*
 
 ```{r}
-
+results %>% #kommer frå simuleringene som blei gjort i over.
+    group_by(n) %>% 
+  summarise(sd_estimate = sd(estimate, na.rm = T),
+            mean_se = mean(se, na.rm = T)) %>%
+  gt() %>% 
+  cols_label(n = "Antall deltakere",
+             sd_estimate = "SD  estimate",
+             mean_se = "Gjennomsnittet av SE") %>% 
+  tab_footnote(footnote = "Forkortelser: SD = standard avvik; SE=standard error")
 ```
 
 ### ##Oppgave 5: Create a histogram (see example code below) of the *p*-values from each study sample-size. How do you interpret these histograms, what do they tell you about the effect of sample size on statistical power?\*\*
@@ -119,26 +129,24 @@ results <- bind_rows(results_8, results_40)
 Ein viktig del av statistikken er framstilling av data på en måte slik at det er lettere for flere personer å skjønne hva vi kan lese ut av disse talla. Det er mange forskjellige måter å framstille slike data, men en av disse er histogram. I histogrammet under har vi laget en framstilling av p-verdien for de to utvalgene samp1 og samp 2.
 
 ```{r}
-
-# A two facets histogram can be created with ggplot2
 results %>%
   ggplot(aes(pval)) + 
   geom_histogram() +
   facet_wrap(~ n)
 
-# Count the proportion of tests below a certain p-value for each 
+
 results %>%
   filter(pval < 0.05) %>%
   group_by(n) %>%
   summarise(sig_results = n()/1000)
 
-# Using the pwr package
+
 library(pwr)
 
 pwr.t.test(n = 40, sig.level = 0.05, d = 1.5/3, type = "one.sample")
 ```
 
-P-verdien beskriver sannsynlighet for at H0 er sann, der en lavere verdi vill si oss noe om i hvor stor grad testen er sann. Ut i fra tabellen over vil vi kunne lese oss fram til at antallet personer har en stor innvirkning på p-verdien. Når vi ser i tabellen til høyre, så ser vi at den har en større samling ved en lavere p-verdi. Ut i fra at begge grafene har en stor grad av lav p-verdi så vill dette si at vi må forkaste HO. Men det viktige her er å observere er at i histogrammet med en størst antall personer, er den samla p-verdien lavere. Altså er vi her enda sikrere på at vi kan avkrefte H=.
+P-verdien beskriver sannsynlighet for at H0 er sann, der en lavere verdi vill si oss noe om i hvor stor grad testen er sann. Ut i fra tabellen over vil vi kunne lese oss fram til at antallet personer har en stor innvirkning på p-verdien. Når vi ser i tabellen til høyre, så ser vi at den har en større samling ved en lavere p-verdi. Ut i fra at begge grafene har en stor grad av lav p-verdi så vill dette si at vi må forkaste HO. Men det viktige her er å observere er at i histogrammet med en størst antall personer, er den samla p-verdien lavere. Altså er vi her enda sikrere på at vi kan avkrefte H0
 
 ### ##Oppgave 6: Calculate the number of studies from each sample size that declare a statistical significant effect (specify a threshold for , your significance level).\*\*
 
@@ -165,7 +173,22 @@ for (n in sample_sizes) {
 
 ```
 
+Måte 2
+
+```{}
+```
+
+Me får
+
 ### ##Oppgave 7: Using the `pwr` package, calculate the power of a one-sample t-test, with a effect size of `1.5/3`, your specified significance level and sample sizes 8 and 40. Explain the results in the light of your simulations.\*\*
+
+Tabbel under riktig, usikker kor me får ut svar som kan brukes til kva gruppe.
+
+```{r}
+{r}
+pwr40 <- pwr.t.test(n = 40, sig.level = 0.05, d = 1.5/3, type = "one.sample")
+pwr8 <- pwr.t.test(n = 8, sig.level = 0.05, d = 1.5/3, type = "one.sample")
+```
 
 Under har vi gjort simuleringer som skal si oss noe om den statistiske styrken for de to datasettene vi har brukt i denne oppgaven. Kalkuleringen tar utgangspunkt fra en større populasjon, som vi har trekt to utvalg ut i fra. Dette er et utvalg på 8 og 40 personer, som vises ved n i utregningene under. Gjennom oppgave teksten har vi fått et effekt nivå oppgitt på forhånd. Et effekt størrelsen er et måle på flere ting, som i stor grad viser forskjellene i data settet vi undersøker. Det som er viktig med effektstørrelsen er at den tar ikke hensyn til n, og er derfor et veldig godt mål på kor anvendbare resultater vi har. Vi har
 

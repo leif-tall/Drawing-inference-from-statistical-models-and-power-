@@ -1,0 +1,284 @@
+---
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+------------------------------------------------------------------------
+
+title: "drawing inference from statistical models and power" format: pdf
+editor_options: chunk_output_type: console execute: echo: false warning:
+false bibliography: referanser/referanser.bib
+
+------------------------------------------------------------------------
+
+## Oppgave 1
+
+Denne oppgava tar utgangspunkt i et datasett og utregninger som er gitt
+i oppgave teksten. Som vi ser under er det simuleringer som tar et
+utgangspunkt i en populasjon på 100000, med et gjennomsnitt på 1.5 som
+har gitt oss et stander aviik på 3. Ut i fra dette skal vi i oppgaven
+skal vi kjøre de gitte simuleringen.
+
+```{r}
+set.seed(1)
+population <- rnorm(1000000, mean = 1.5, sd = 3)
+
+
+samp1 <- data.frame(y = sample(population, 8, replace = FALSE))
+
+samp2 <- data.frame(y = sample(population, 40, replace = FALSE))
+
+
+m1 <- lm(y ~ 1, data = samp1)
+m2 <- lm(y ~ 1, data = samp2)
+
+summary(m1)
+summary(m2)
+```
+
+Vi har over gjennomført en regresjonsanalyse av de to studiene m1 og m2.
+Dette er tall som er henta fra det samme tall materialet. Det er studier
+som er gjort av 1000 observasjoner med fire ulike variabler. En har
+gjort forskjell mellom de ulike med å ha en forskjell i antall personer
+i de to studiene. M1 har n=8 mens m2 har n= 40 no som skaper litt
+forskjellige tall. I data settet har vi skapt noen skapt nye variabler
+som vil kunne fortelle oss noe om svarene hadde blitt hadde vi gjort
+uttrekningene for hele datasettet. I dette tilfellet forteller estimatet
+oss hva gjennomsnittet ville blitt, viss vi i dette tilfellet tar 8
+eller 40 personer og lager utvalg av dette. Et godt estimat vill være at
+vi skal få dette nærmest mulig gjennomsnittet for den store
+populasjonen. Med et gjennomsnitt av populasjonen på 1,5, så har vi et
+estimat i m1 på 1,840 og m2 på 1,5642. Dette viser oss gjennom m2 at gjo
+større n er, får vi et riktige estimat i forhold til gjennomsnittet.
+Selv om 1,840 ikke er så langt unna det heller.
+
+Vi får flere interesange variabler som vi får ut av denne simuleringen.
+Standar error forteller oss hvor nøyaktig gjennomsnittet av et gitt
+utvalg fra denne populasjonen sannsynligvis vil være sammenlignet med
+det sanne populasjonsement. Men hva vill dette si oss? For simuleringene
+vi har gjort over får vi en standarerror i m1 på 1.251 og på m2 får vi
+en standarerror på 0,4704. Dette viser oss at vi med en større n, vill
+få en lavere standar error. Forskjellen fra estimatet er at
+standarerroren er regna ut i fra standaraviket i den store populasjonen.
+
+Når vi regner på denne måten får vi ut fleire variabler som sier oss noe
+om hvordan styrken til nullhypotsen vill være. En av disse to verdiene
+er t-verdien som tar for seg forskjellene, mellom ulike gruppe settet. I
+dette tilfelle dreier dette seg om forskjellen mellom den store
+populasjonen og utvalget vi har tatt ut i fra dette. Vi ser at t-verdien
+forteller oss at signifikans nivået er større i m2 enn i m1. Noe som
+sier oss at vi ikke bare klarer å estimere bedre gjenomsnitt og
+standarerror ved et større antall personer. Vi klarer også å finne et
+bedre aviik mellom utvalget og det orgninale populkasjonen.
+
+P verdien forteller oss noe om graden av sannsynligheit for at null
+hypotesen er sann. En lavere p-verdi vil vill vise oss at
+sannsynligheiten at HO er usann og må derfor forkastest. Vi vill ut i
+fra dette se at selv om talla viser oss at vi må i disse stuene forkaste
+H0, så gir m2 oss en enda lavere verdi enn m1. No som sier oss at flere
+personer vil gi en større sannsynlighet på å anslå om HO er usann enn om
+vi hadde hatt før personer.
+
+## Oppgave 2
+
+Antall deltakere, effektstørrelsen, utvalgets homogenitet og risikoen
+for feilaktige konklusjoner påvirker den statistiske styrken (Cohen,
+1988). Den statistiske styrken blir definert som sannsynligheten for å
+få et statistisk signifikant resultat, gitt at antagelsene er korrekte.
+I statistisk terminologi så er statistisk styrke sannsynligheten for at
+den statistiske testen forkaster nullhypotsesen hvis den alternative
+hypotesen er sann. Den matematiske og statistiske teorien er klart
+definert for de fleste statistiske metoder, men de etiske og
+forskningsmetodologiske implikasjonene av antalls- og styrkeberegninger
+er mer omdiskutert. (Pripp, 2017).
+
+Måten man finner ut hvor mange deltakere en studie bør ha er å
+gjennomføre antalls- og styrkeberegninger. Dette blir gjort ved at en i
+forkant av studien antar hvor stor effekten forventes å være eller hvor
+stor den bør være for å få et statistisk signifikant nivå. Ut ifra dette
+så beregner man sannsynligheten for at resultatet av en studie med et
+gitt antall deltakere får et statistisk signifikant resultat. Jo større
+effektstørrelse, desto større statistisk styrke og dermed trengs det
+færre deltakere (fig.1). Homogeniteten til deltakerne påvirker også den
+statistiske styrken. Jo mer homogene deltakerne er gir et lavere
+standardavvik og økt statistisk styrke.
+
+Figure 1 Sammenhengen mellom antall deltagere i studien og statistisk
+styrke ved liten, middels eller stor effektstørrelse, Cohens d lik
+henholdsvis 0,2, 0,5 eller 0,8 (Cohen, 1988). Cohens d er et eksempel på
+en statistisk effektstørrelse. Økt antall deltagere i studien gir økt
+statistisk styrke og større sannsynlighet for å kunne påvise en
+statistisk signifikant forskjell mellom to utvalg (p-verdi \< 0,05)\
+Cohen J. The Effect Size Index: d. Statistical Power Analysis for the
+Behavioral Sciences. 2. utg. Hillsdale, NJ: Lawrence Earlbaum
+Associates, 1988: 20-7.
+
+Så hva er forskjellen på en studie med 8 deltakere og en studie med 48
+deltakere? I teorien kan en studie med 8 deltakere kan gi statistisk
+signifikante resultater gitt en stor effektstørrelse, stor homogenitet
+blant deltakerne og riktige antagelser i den statistiske analysen. I
+praksis er dette vanskelig å få til og man ender opp med en studie med
+lav statistisk styrke. Hvis det er for få deltagere i studien, blir det
+ofte resultater som tyder på en reell effekt, men som ikke er statistisk
+signifikant. En p-verdi lavere enn 0,05 kan være forskjellen mellom å
+kunne hevde noe med sikkerhet eller kun å kunne si at flere studier er
+nødvendig for å kunne si noe med sikkerhet (Pripp, 2015).
+
+Studier med lav statistisk styrke på grunn av for få inkluderte
+deltagere er sterkt kritisert i det vitenskapelige miljøet. Det er sagt
+at studier med lav statistisk styrke er uetiske, fordi de utsetter
+deltagerne for unødig stor risiko og byrde uten at de kan gi
+tilstrekkelig vitenskapelig innsikt (Halpern, Karlawish & Berlin, 2002).
+Andre hevder derimot at det etiske forholdet mellom deltagerens byrde og
+studiens vitenskapelige verdi kan være mindre fordelaktig for store enn
+for små studier. De mener at studier med lav statistisk styrke ikke
+nødvendigvis er uetiske og at en statistisk styrke på minst 80 % ikke er
+et generelt krav til en etisk forsvarlig studie (Bacchetti, Wolf, Segal
+& McCulloch, 2005).
+
+Dersom man inkluderer for mange testpersoner i en studie medfører gjerne
+unødvendig bruk av tid og ressurser og at man utsette for mange personer
+for unødvendig stor risiko og byrde. For å oppsummere kan man si at
+forskjellen på en studie på 8 og 48 deltakere, gitt lik effektstørrelse,
+homogenitet og like antagelser, er at studien med flest deltakere vil gi
+høyere statistisk styrke. Men, dersom effektstørrelsen er høy og
+homogeniteten er stor har man utsatt for mange mennesker for et
+potensielt unødvendig høyt stress, risiko og generell byrde.
+
+### 
+
+## Oppgave 3
+
+For å kunne forklare hvorfor vi bruker de skyggelage delene i den øvre
+og nedre delene av en normalfordelingskure, så er det hensiktsmessig å
+forklare hva en normalfordelingskure framstiller for oss. En
+normalfordelingskure er en funksjon som beskriver fordelingen av verdier
+for en variabel, der en ikke har et fast mønster i fordelingen. Når vi
+skal forklare kurven, så er det enklest å ta utgangspunkt i punktet på
+midten. For høyden på grafen, viser oss noe om antall observasjoner som
+er samla innenfor dette område. Når vi ser at største delen av dette er
+samlet i midten, så viser den oss at det er her gjennomsnittet ligger.
+Verdiene vi har utover på de to sidene, verdier som er utskudd fra
+resten av
+tallmatrialet.<https://www.mn.uio.no/ibv/tjenester/kunnskap/plantefys/matematikk/normalfordeling.html>
+
+En normalfordelingskure tar utgangspunktet i at 95 prosent av
+populasjonen som via har hentet ut tallmateriale. Vill være innenfor
+gjennomsnittet +/- to standardavvik, og at 99,8 prosent vill være
+innenfor tre standardavvik. Når vi skal se på et tall i forhold til
+normalfordelingskurven, vill vi da kunne gi tallet en *Z-skår.* Denne
+beskriver kor mange standardavvik en observasjon vi ønsker å undersøke
+er fra gjennomsnittet. Når vi har flere observasjoner som ligger
+innenfor det samme område, kan vi beskrive at de ligger innenfor samme
+*persentil*. Når vi tar utgangspunkt i normalfordelingskurven, så er
+midten(medianen) i kurven den 50 persentil. Ut i fra denne beregner en
+den 25 og den 75 persentil. Disse er også kjent som
+*kvartiler\[*spiegelhalter\]*.* For å kunne skille de to kvartilene fra
+andre deler av kurven er disse ofte fargelagt i en annen farge, her
+finner en verdiene som er ekstreme og ikke legger sei i den 50 th
+persentil. Avstanden mellom de to kvartilene er målet på distribusjonen
+i data
+settet.<https://tma4245.math.ntnu.no/stokastiske-variabler-og-fordelinger/kvantil/>.
+
+## Simuleringen for oppgave 4-8
+
+Data simuleringen under er henta fra oppgaveteksten. Denne simuleringen
+skaper datasettet "results" som inneholder 2000 observasjoner av 4 ulike
+variabler. Dette datasettet skal vi i oppgave 4 til 8 gjøre flere
+utregninger fra, som vil hjelpe oss å svare på disse oppgavene.
+
+```{r}
+# Create data frames to store the model estimates
+results_8 <- data.frame(estimate = rep(NA, 1000), 
+                      se = rep(NA, 1000), 
+                      pval = rep(NA, 1000), 
+                      n = 8)  
+
+results_40 <- data.frame(estimate = rep(NA, 1000), 
+                      se = rep(NA, 1000), 
+                      pval = rep(NA, 1000), 
+                      n = 40)
+
+# A for loop used to sample 1000 studies, each iteration (i) will draw a new sample
+# from the population. 
+
+for(i in 1:1000) {
+  
+  # Draw a sample 
+  samp1 <- data.frame(y = sample(population, 8, replace = FALSE))
+  samp2 <- data.frame(y = sample(population, 40, replace = FALSE))
+
+  # Model the data
+  m1 <- lm(y ~ 1, data = samp1)
+  m2 <- lm(y ~ 1, data = samp2)
+  
+  # Extract values from the models
+  results_8[i, 1] <- coef(summary(m1))[1, 1]
+  results_8[i, 2] <- coef(summary(m1))[1, 2]
+  results_8[i, 3] <- coef(summary(m1))[1, 4]
+
+  results_40[i, 1] <- coef(summary(m2))[1, 1]
+  results_40[i, 2] <- coef(summary(m2))[1, 2]
+  results_40[i, 3] <- coef(summary(m2))[1, 4]
+  
+  
+}
+
+# Save the results in a combined data frame
+
+results <- bind_rows(results_8, results_40)
+```
+
+## Oppgave 4
+
+Mangler å skrive. Tabell er riktig under
+
+```{r}
+results %>% #kommer frå simuleringene som blei gjort i over.
+    group_by(n) %>% 
+  summarise(sd_estimate = sd(estimate, na.rm = T),
+            mean_se = mean(se, na.rm = T)) %>%
+  gt() %>% 
+  cols_label(n = "Antall deltakere",
+             sd_estimate = "SD  estimate",
+             mean_se = "Gjennomsnittet av SE") %>% 
+  tab_footnote(footnote = "Forkortelser: SD = standard avvik; SE=standard error")
+```
+
+## Oppgave 5:
+
+En viktig del av statistikken er framstilling av data på en måte slik at
+det er lettere for flere personer å skjønne hva vi kan lese ut av disse
+verdiene vi skaper gjennom de statistiske testene. Det er mange
+forskjellige måter å framstille slike data, men en av disse er
+histogram. I histogrammet under har vi laget en framstilling av
+p-verdien for de to utvalgene samp1 og samp2.
+
+```{r}
+results %>%
+  ggplot(aes(pval)) + 
+  geom_histogram() +
+  facet_wrap(~ n)
+
+
+results %>%
+  filter(pval < 0.05) %>%
+  group_by(n) %>%
+  summarise(sig_results = n()/1000)
+
+
+library(pwr)
+
+pwr.t.test(n = 40, sig.level = 0.05, d = 1.5/3, type = "one.sample")
+```
+
+P-verdien beskriver sannsynlighet for at H0 er sann, der en lavere verdi
+vill si oss noe om i hvor stor grad testen er sann. Ut i fra tabellen
+over vil vi kunne lese oss fram til at antallet personer har en stor
+innvirkning på p-verdien. Når vi ser i tabellen til høyre, så ser vi at
+den har en større samling ved en lavere p-verdi. Ut i fra at begge
+grafene har en stor grad av lav p-verdi så vill dette si at vi må
+forkaste HO. Men det viktige her er å observere er at i histogrammet med
+en størst antall personer, er den samla p-verdien lavere. Altså er vi
+her enda sikrere på at vi kan avkrefte H0.
