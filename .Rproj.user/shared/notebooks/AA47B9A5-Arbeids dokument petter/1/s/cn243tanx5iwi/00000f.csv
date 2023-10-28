@@ -1,0 +1,32 @@
+"0","# Calculate the number of studies declaring significance for each sample size
+for (n in sample_sizes) {
+    # Calculate power using the pwr.t.test function
+    power <- pwr.t.test(d = effect_size, sig.level = alpha, power = NULL, n = n)$power
+    
+    # Calculate the number of studies
+    num_studies <- qbinom(1 - alpha, size = 1, prob = power)
+    
+    # Output the result
+    cat(""Sample size:"", n, ""- Number of studies declaring significance:"", num_studies, ""\n"")
+}
+"
+"1","Sample size:"
+"1"," "
+"1","8"
+"1"," "
+"1","- Number of studies declaring significance:"
+"1"," "
+"1","1"
+"1"," "
+"1","
+"
+"1","Sample size:"
+"1"," "
+"1","40"
+"1"," "
+"1","- Number of studies declaring significance:"
+"1"," "
+"1","1"
+"1"," "
+"1","
+"
