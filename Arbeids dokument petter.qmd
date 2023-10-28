@@ -110,6 +110,10 @@ results <- bind_rows(results_8, results_40)
 
 ### ##Oppgave 4: Calculate the standard deviation of the `estimate` variable, and the average of the `se` variable for each of the study sample sizes (8 and 40). Explain why these numbers are very similar. How can you define the Standard Error (SE) in light of these calculations?\*\*
 
+```{r}
+
+```
+
 ### ##Oppgave 5: Create a histogram (see example code below) of the *p*-values from each study sample-size. How do you interpret these histograms, what do they tell you about the effect of sample size on statistical power?\*\*
 
 Ein viktig del av statistikken er framstilling av data på en måte slik at det er lettere for flere personer å skjønne hva vi kan lese ut av disse talla. Det er mange forskjellige måter å framstille slike data, men en av disse er histogram. I histogrammet under har vi laget en framstilling av p-verdien for de to utvalgene samp1 og samp 2.
@@ -140,10 +144,57 @@ P-verdien beskriver sannsynlighet for at H0 er sann, der en lavere verdi vill si
 
 ### ##Oppgave 7: Using the `pwr` package, calculate the power of a one-sample t-test, with a effect size of `1.5/3`, your specified significance level and sample sizes 8 and 40. Explain the results in the light of your simulations.\*\*
 
+Under har vi gjort simuleringer som skal si oss noe om den statistiske styrken for de to datasettene vi har brukt i denne oppgaven. Kalkuleringen tar utgangspunkt fra en større populasjon, som vi har trekt to utvalg ut i fra. Dette er et utvalg på 8 og 40 personer, som vises ved n i utregningene under. Gjennom oppgave teksten har vi fått et effekt nivå oppgitt på forhånd. Et effekt størrelsen er et måle på flere ting, som i stor grad viser forskjellene i data settet vi undersøker. Det som er viktig med effektstørrelsen er at den tar ikke hensyn til n, og er derfor et veldig godt mål på kor anvendbare resultater vi har. Vi har
+
 ```{r}
-install.packages("pwr")
-library(pwr)
+#effekt størrelse 1,5
+effekt_storrelse <- 1.5
+alfa_nivå <- 0.05
+n <- 8
+
+pwr.t.test(d = effekt_storrelse, sig.level = alfa_niva, power = NULL, n = n, type = "one.sample")
+
+
+? pwr.t.test
+
+effekt_storrelse <- 1.5
+alfa_nivå <- 0.05
+n <- 40
+
+pwr.t.test(d = effekt_storrelse, sig.level = alfa_niva, power = NULL, n = n, type = "one.sample")
+
+
+? pwr.t.test
 ```
+
+Når vi gjennomfører utregningene over, med en effekt størrelse på 1,5 men med en forskjell i n på 8 og 40 vill vi få ut en statistisk power på 0,9509 for testen med n=8 og 1 for testen ved n=40
+
+```{r}
+# Effekt størrelse 3
+library(pwr)
+effekt_storrelse <- 3
+alfa_nivå <- 0.05
+n <- 8
+
+pwr.t.test(d = effekt_storrelse, sig.level = alfa_niva, power = NULL, n = n, type = "one.sample")
+
+? pwr.t.test
+
+effekt_storrelse <- 3
+alfa_nivå <- 0.05
+n <- 40
+
+pwr.t.test(d = effekt_storrelse, sig.level = alfa_niva, power = NULL, n = n, type = "one.sample")
+
+? pwr.t.test
+
+
+
+```
+
+Over gjør vi de samme utregningen som ble gjort for effekt størrelse 1,5. Vi behold antallet personer i begge gruppene. Vi ser her at det ikke er de største forandringene i statistiske power der n=8 har en statistisk power på 0, 9999. Mens gruppa med n=40 har en statistisk power på 1.
+
+Når vi ser den power utregningene her i samsvar med det vi har gjort tidligere i denne oppgava så er det slik at sannsynligheten også her er svært stor for at vi må forkaste H0.
 
 ### ##Oppgave 8: With a significance level of 5%, how many studies would give you a "false positive" result if you did many repeated studies?\*\*
 

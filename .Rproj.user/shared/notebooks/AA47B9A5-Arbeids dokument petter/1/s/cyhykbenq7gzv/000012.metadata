@@ -1,1 +1,1 @@
-{"height":419.035846724351,"width":678.0,"size_behavior":0,"conditions":[[0,"\u001B[38;5;254m`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.\u001B[39m"]]}
+{"classes":["tbl_df","tbl","data.frame"],"nrow":2,"ncol":2,"summary":{"A tibble":["2 × 2"]}}
