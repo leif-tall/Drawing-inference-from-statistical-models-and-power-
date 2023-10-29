@@ -40,7 +40,7 @@ summary(m2)
 
 Vi har over gjennomført en regresjonsanalyse av de to studiene m1 og m2. Dette er tall som er henta fra det samme tallmaterialet. Det er studier som er gjort av 1000 observasjoner med fire ulike variabler. Man har gjort forskjell mellom de ulike ved forskjell i antall personer i de to studiene. M1 har n=8, mens m2 har n= 40. Dette skaper litt forskjellige tall. I dette tilfelle forteller estimatet oss hva gjennomsnittet ville blitt, ut ifra om vi tar 8 eller 40 personer og lager utvalg av dette. Et godt estimat vil være at vi skal få dette nærmest mulig gjennomsnittet for den store populasjonen [@spiegelhalter2019]. Med et gjennomsnitt av populasjonen på 1,5, så har vi et estimat i m1 på 1,840 og m2 på 1,5642. Dette viser oss gjennom m2 at jo større n er, får vi et riktigere estimat i forhold til gjennomsnittet. Selv om 1,840 ikke er så langt unna det heller.
 
-Vi får flere interessante variabler ut av denne simuleringen. Stander error forteller oss hvor nøyaktig gjennomsnittet av et gitt utvalg fra denne populasjonen sannsynligvis vil være sammenlignet med det sanne populasjonsement [@Spiegelhalter2019].Men hva vil dette si oss? For simuleringene vi har gjort over får vi en stander error i m1 på 1.251 og på m2 får vi en stander error på 0,4704. Dette viser at vi med en større n, vil få en lavere stander error. Forskjellen fra estimatet er at stander erroren er regnet ut i fra standaravviket i den store populasjonen. 
+Vi får flere interessante variabler ut av denne simuleringen. Stander error forteller oss hvor nøyaktig gjennomsnittet av et gitt utvalg fra denne populasjonen sannsynligvis vil være sammenlignet med det sanne populasjonsement [@Spiegelhalter2019].Men hva vil dette si oss? For simuleringene vi har gjort over får vi en stander error i m1 på 1.251 og på m2 får vi en stander error på 0,4704. Dette viser at vi med en større n, vil få en lavere stander error. Forskjellen fra estimatet er at stander erroren er regnet ut i fra standaravviket i den store populasjonen.
 
 Når vi regner på denne måten får vi ut flere variabler som sier oss noe om hvordan styrken til null hypotsen vil være. En av disse to verdiene er t-verdien som tar for seg forskjellene mellom ulike gruppesett [@spiegelhalter2019]. I dette tilfelle dreier det seg om forskjellen mellom den store populasjonen og utvalget vi har tatt ut i fra dette. Vi ser at t-verdien forteller oss at signifikansnivå er større i m2 enn i m1. Noe som sier oss at vi ikke bare klarer å estimere bedre gjennomsnitt og stander error ved et større antall personer. Vi klarer også å finne et bedre avvik mellom utvalget og den originale populasjonen.
 
@@ -57,7 +57,6 @@ Så hva er forskjellen på en studie med 8 deltakere og en studie med 40 deltake
 Studier med lav statistisk styrke på grunn av for få inkluderte deltagere er sterkt kritisert i det vitenskapelige miljøet. Det er sagt at studier med lav statistisk styrke er uetiske, fordi de utsetter deltagerne for unødig stor risiko og byrde uten at de kan gi tilstrekkelig vitenskapelig innsikt [@halpern2002]. Andre hevder derimot at det etiske forholdet mellom deltagerens byrde og studiens vitenskapelige verdi kan være mindre fordelaktig for store enn for små studier. De mener at studier med lav statistisk styrke ikke nødvendigvis er uetiske og at en statistisk styrke på minst 80% ikke er et generelt krav til en etisk forsvarlig studie [@bacchetti2005].
 
 Dersom man inkluderer for mange testpersoner i en studie medfører gjerne unødvendig bruk av tid og ressurser og at man utsette for mange personer for unødvendig stor risiko og byrde. For å oppsummere kan man si at forskjellen på en studie på 8 og 48 deltakere, gitt lik effektstørrelse, homogenitet og like antagelser, er at studien med flest deltakere vil gi høyere statistisk styrke. Men, dersom effektstørrelsen er høy og homogeniteten er stor har man utsatt for mange mennesker for et potensielt unødvendig høyt stress, risiko og generell byrde.
-
 
 ## Oppgave 3
 
@@ -134,11 +133,11 @@ results %>% #kommer frå simuleringene som blei gjort i over.
   tab_footnote(footnote = "Forkortelser: SD = standard avvik; SE=standard error")
 ```
 
-Som vi ser av tabellen over er det ikke stor forskjell mellom standardavviket av estimatet og gjennomsnittet av stander error. Dette er fordi det er to variabler som brukes for å beskrive det samme, men de brukes i forskjellige sammenhenger. Standardavvik kan defineres som "kvadratroten av variansen i en prøve eller distribusjonen av et datasett", mens stander error kan defineres som "standardavviket av et gjennomsnitt for et utvalg når dette er satt opp tilfeldig". Derfor ser vi at tallene som er i tabellen over blir veldig like hverandre [@spiegelhalter2019]. 
+Som vi ser av tabellen over er det ikke stor forskjell mellom standardavviket av estimatet og gjennomsnittet av stander error. Dette er fordi det er to variabler som brukes for å beskrive det samme, men de brukes i forskjellige sammenhenger. Standardavvik kan defineres som "kvadratroten av variansen i en prøve eller distribusjonen av et datasett", mens stander error kan defineres som "standardavviket av et gjennomsnitt for et utvalg når dette er satt opp tilfeldig". Derfor ser vi at tallene som er i tabellen over blir veldig like hverandre [@spiegelhalter2019].
 
 ## Oppgave 5:
 
-En viktig del av statistikken er framstilling av data på en måte slik at det er lettere for flere personer å skjønne hva vi kan lese ut av disse verdiene vi skaper gjennom de statistiske testene. Det er mange forskjellige måter å framstille slike data, men en av disse er histogram. I histogrammet under har vi laget en framstilling av p-verdien for de to utvalgene samp1 og samp2. 
+En viktig del av statistikken er framstilling av data på en måte slik at det er lettere for flere personer å skjønne hva vi kan lese ut av disse verdiene vi skaper gjennom de statistiske testene. Det er mange forskjellige måter å framstille slike data, men en av disse er histogram. I histogrammet under har vi laget en framstilling av p-verdien for de to utvalgene samp1 og samp2.
 
 ```{r}
 #| echo: false
