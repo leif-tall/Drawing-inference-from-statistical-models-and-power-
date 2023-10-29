@@ -1,3 +1,0 @@
-"0","pwr40 <- pwr.t.test(n = 40, sig.level 0.05, d =1.5/3, type = ""one.sample"")"
-"2","Error: unexpected numeric constant in ""pwr40 <- pwr.t.test(n = 40, sig.level 0.05""
-"

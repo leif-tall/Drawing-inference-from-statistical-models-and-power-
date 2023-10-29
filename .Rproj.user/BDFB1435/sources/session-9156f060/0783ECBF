@@ -3,7 +3,7 @@
     "path": "~/Library/Mobile Documents/com~apple~CloudDocs/Documents/3.0 HINN/Master/IDR4000 - Kvantitativ metode og statistikk/Statistikk/Arbeidskrav /Drawing-inference-from-statistical-models-and-power-/Arbeids dokument petter.qmd",
     "project_path": "Arbeids dokument petter.qmd",
     "type": "quarto_markdown",
-    "hash": "4272298321",
+    "hash": "1071424691",
     "contents": "",
     "dirty": false,
     "created": 1698312582483.0,
@@ -12,20 +12,20 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "182,0",
+        "cursorPosition": "299,0",
         "scrollLine": "0",
         "rmdVisualMode": "true",
         "rmdVisualWrapConfigured": "true",
         "docOutlineVisible": "1",
-        "rmdVisualModeLocation": "13456:6553",
-        "rmdVisualCollapsedChunks": "93"
+        "rmdVisualModeLocation": "17072:10034",
+        "rmdVisualCollapsedChunks": ""
     },
     "folds": "",
-    "lastKnownWriteTime": 1698500394,
+    "lastKnownWriteTime": 1698584266,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1698500394607,
+    "last_content_update": 1698584266911,
     "read_only": false,
     "read_only_alternatives": []
 }
