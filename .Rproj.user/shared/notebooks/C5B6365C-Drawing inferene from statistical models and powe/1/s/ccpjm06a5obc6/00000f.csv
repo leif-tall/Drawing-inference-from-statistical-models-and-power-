@@ -1,2 +1,0 @@
-"0","pwr8 <- pwr.t.test(n = 8, sig.level = 0.05, d = 1.5/3, type = ""one.sample"")"
-"0","pwr40 <- pwr.t.test(n = 40, sig.level = 0.05, d = 1.5/3, type = ""one.sample"")"

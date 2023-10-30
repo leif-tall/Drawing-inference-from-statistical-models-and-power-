@@ -1,6 +1,0 @@
-"0",""
-"0","# A two facets histogram can be created with ggplot2"
-"0","results %>%"
-"0","  ggplot(aes(pval)) + "
-"0","  geom_histogram() +"
-"0","  facet_wrap(~ n)"

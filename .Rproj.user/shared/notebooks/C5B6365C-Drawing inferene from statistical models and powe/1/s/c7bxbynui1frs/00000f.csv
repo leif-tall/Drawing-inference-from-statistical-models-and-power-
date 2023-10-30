@@ -1,4 +1,0 @@
-"0","results_null %>%"
-"0","  ggplot(aes(pval)) + "
-"0","  geom_histogram() +"
-"0","  facet_wrap(~ n)"
